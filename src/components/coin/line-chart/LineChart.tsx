@@ -48,27 +48,27 @@ const LineChart: React.FC<LineChartProps> = ({
           },
         },
       },
-      y2: multiAxis
-        ? {
-            type: "linear" as const,
-            display: true,
-            position: "right" as const,
-            ticks: {
-              callback: function (value: string | number) {
-                if (typeof value === "number") {
-                  if (priceType === "total_volumes") {
-                    return convertNumber(value);
-                  } else if (priceType === "market_caps") {
-                    return "$" + convertNumber(value);
-                  } else {
-                    return "$" + value.toLocaleString();
-                  }
+      ...(multiAxis && {
+        y2: {
+          type: "linear" as const,
+          display: true,
+          position: "right" as const,
+          ticks: {
+            callback: function (value: string | number) {
+              if (typeof value === "number") {
+                if (priceType === "total_volumes") {
+                  return convertNumber(value);
+                } else if (priceType === "market_caps") {
+                  return "$" + convertNumber(value);
+                } else {
+                  return "$" + value.toLocaleString();
                 }
-                return value; // in case value is a string
-              },
+              }
+              return value; // in case value is a string
             },
-          }
-        : undefined, // Set undefined when multiAxis is false
+          },
+        },
+      }),
     },
   };
 
