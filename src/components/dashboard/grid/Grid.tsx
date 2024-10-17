@@ -14,7 +14,7 @@ import { CoinSummary } from "../../../types/coin-item";
 interface GridProps {
   coin: CoinSummary;
   delay: number;
-  isWatchlistPage: boolean;
+  isWatchlistPage?: boolean;
 }
 
 const Grid: React.FC<GridProps> = ({ coin, delay, isWatchlistPage }) => {
