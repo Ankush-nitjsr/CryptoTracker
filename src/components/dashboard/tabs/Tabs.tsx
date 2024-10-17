@@ -41,7 +41,7 @@ const TabsComponent: React.FC<TabsComponentProps> = ({
     fontSize: "1.2rem",
     fontWeight: 600,
     fontFamily: "Inter",
-    textTransform: "capitalize" as const,
+    textTransform: "capitalize",
   };
 
   return (
@@ -69,7 +69,6 @@ const TabsComponent: React.FC<TabsComponentProps> = ({
                   </div>
                 </div>
               ) : (
-                isWatchlistPage &&
                 coins?.map((coin, i) => (
                   <Grid
                     coin={coin}
@@ -83,30 +82,32 @@ const TabsComponent: React.FC<TabsComponentProps> = ({
           </TabPanel>
           <TabPanel value="list" className="tabPanel">
             <table className="list-flex">
-              {coins.length === 0 ? (
-                <div>
-                  <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>
-                    No Items Found
-                  </h1>
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    {setSearch && (
-                      <Button
-                        text="Clear Search"
-                        onClick={() => setSearch("")}
-                      />
-                    )}
+              <tbody>
+                {coins.length === 0 ? (
+                  <div>
+                    <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>
+                      No Items Found
+                    </h1>
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      {setSearch && (
+                        <Button
+                          text="Clear Search"
+                          onClick={() => setSearch("")}
+                        />
+                      )}
+                    </div>
                   </div>
-                </div>
-              ) : (
-                coins?.map((coin, i) => (
-                  <List
-                    coin={coin}
-                    key={i}
-                    delay={(i % 10) * 0.1}
-                    isWatchlistPage={isWatchlistPage}
-                  />
-                ))
-              )}
+                ) : (
+                  coins?.map((coin, i) => (
+                    <List
+                      coin={coin}
+                      key={i}
+                      delay={(i % 10) * 0.1}
+                      isWatchlistPage={isWatchlistPage}
+                    />
+                  ))
+                )}
+              </tbody>
             </table>
           </TabPanel>
         </TabContext>
