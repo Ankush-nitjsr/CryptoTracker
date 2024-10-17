@@ -7,22 +7,27 @@ import { getCoins } from "../apis/getCoins";
 import { CoinSummary } from "../types/coin-item";
 
 function WatchlistPage() {
-  const coins: string[] = JSON.parse(localStorage.getItem("watchlist") || "[]");
+  const [coins, setCoins] = useState<string[]>([]);
   const [myWatchlist, setMyWatchlist] = useState<CoinSummary[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const getData = async () => {
-    setLoading(true);
-    const allCoins = await getCoins();
-    if (coins.length > 0 && allCoins) {
-      setMyWatchlist(allCoins.filter((item) => coins.includes(item.id)));
-    }
-    setLoading(false);
-  };
-
   useEffect(() => {
+    // Get watchlist coins from localStorage
+    const storedCoins = JSON.parse(localStorage.getItem("watchlist") || "[]");
+    setCoins(storedCoins);
+
+    const getData = async () => {
+      setLoading(true);
+      const allCoins = await getCoins();
+      if (storedCoins.length > 0 && allCoins) {
+        setMyWatchlist(
+          allCoins.filter((item) => storedCoins.includes(item.id))
+        );
+      }
+      setLoading(false);
+    };
     getData();
-  }, []);
+  }, []); // No need to include 'coins' in the dependency array
 
   return (
     <div>
