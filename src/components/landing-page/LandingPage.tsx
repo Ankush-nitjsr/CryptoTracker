@@ -3,6 +3,7 @@ import "./styles.css";
 import gradient from "../../assets/gradient.png";
 import iPhone from "../../assets/phone.png";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const LandingPageComponent = () => {
   return (
@@ -39,9 +40,9 @@ const LandingPageComponent = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <a href="/dashboard">
+          <Link to="/dashboard">
             <Button text="Dashboard" />
-          </a>
+          </Link>
         </motion.div>
       </div>
       <div className="landing-right">
