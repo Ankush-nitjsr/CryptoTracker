@@ -19,7 +19,7 @@ const Footer = () => {
         <a href="https://facebook.com">
           <FacebookIcon className="social-link" />
         </a>
-        <a href="mailto:avivashishta@gmail.com">
+        <a href="mailto:ankushnitjsr@gmail.com">
           <EmailIcon className="social-link" />
         </a>
         <a href="https://www.twitter.com">
