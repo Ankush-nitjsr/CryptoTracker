@@ -3,7 +3,7 @@ import "./styles.css";
 
 interface ButtonProps {
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
   outlined?: boolean;
 }
 
