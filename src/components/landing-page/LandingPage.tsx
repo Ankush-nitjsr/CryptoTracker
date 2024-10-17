@@ -1,7 +1,7 @@
 import Button from "../common/button/Button";
 import "./styles.css";
-import gradient from "../../../assets/gradient.png";
-import iPhone from "../../../assets/iphone.png";
+import gradient from "../../assets/gradient.png";
+import iPhone from "../../assets/phone.png";
 import { motion } from "framer-motion";
 
 const LandingPageComponent = () => {
@@ -30,7 +30,7 @@ const LandingPageComponent = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Track crypto through a public api in real time. Visit the dashboard to
+          Track crypto through a public API in real time. Visit the dashboard to
           do so!
         </motion.p>
         <motion.div
@@ -45,10 +45,9 @@ const LandingPageComponent = () => {
         </motion.div>
       </div>
       <div className="landing-right">
-        <img src={gradient} alt="Gradient Background" className="gradient" />
+        <img src={gradient} className="gradient" alt="Gradient background" />
         <motion.img
           src={iPhone}
-          alt="iPhone Mockup"
           className="iphone"
           initial={{ y: -10 }}
           animate={{ y: 10 }}
@@ -58,6 +57,7 @@ const LandingPageComponent = () => {
             duration: 2,
             repeat: Infinity,
           }}
+          alt="iPhone mockup"
         />
       </div>
     </div>
