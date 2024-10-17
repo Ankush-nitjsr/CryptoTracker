@@ -98,31 +98,29 @@ const ComparePage = () => {
     setLoading(false);
   };
 
-  const getData = async () => {
-    setLoading(true);
-    const data = await getCoins();
-    if (data) {
-      setAllCoins(data);
-    }
-    const data1 = await getCoin(coin1);
-    const data2 = await getCoin(coin2);
-    if (data1) setCoin1Data(data1);
-    if (data2) setCoin2Data(data2);
-    const prices1 = await getCoinPrices(coin1, days, priceType);
-    const prices2 = await getCoinPrices(coin2, days, priceType);
-
-    // Ensure both data1 and data2 are defined
-    if (data1 && data2) {
-      settingChartData(setChartData, prices1, data1, data2, prices2);
-    }
-    setLoading(false);
-  };
-
   useEffect(() => {
-    if (coin1 && coin2) {
-      getData();
-    }
-  }, [coin1, coin2]);
+    const getData = async () => {
+      setLoading(true);
+      const data = await getCoins();
+      if (data) {
+        setAllCoins(data);
+      }
+      const data1 = await getCoin(coin1);
+      const data2 = await getCoin(coin2);
+      if (data1) setCoin1Data(data1);
+      if (data2) setCoin2Data(data2);
+      const prices1 = await getCoinPrices(coin1, days, priceType);
+      const prices2 = await getCoinPrices(coin2, days, priceType);
+
+      // Ensure both data1 and data2 are defined
+      if (data1 && data2) {
+        settingChartData(setChartData, prices1, data1, data2, prices2);
+      }
+      setLoading(false);
+    };
+
+    getData();
+  }, [coin1, coin2, days, priceType]);
 
   return (
     <div>
@@ -139,11 +137,15 @@ const ComparePage = () => {
             handleCoinChange={handleCoinChange}
             handleDaysChange={handleDaysChange}
           />
-          <div className="grey-wrapper">
-            <List coin={coin1Data} delay={0.1} />
-          </div>
-          <div className="grey-wrapper">
-            <List coin={coin2Data} delay={0.2} />
+          <div>
+            <table style={{ width: "100%" }}>
+              <tbody className="grey-wrapper">
+                <List coin={coin1Data} delay={0.1} />
+              </tbody>
+              <tbody className="grey-wrapper">
+                <List coin={coin2Data} delay={0.2} />
+              </tbody>
+            </table>
           </div>
           <div className="grey-wrapper">
             <PriceToggle
