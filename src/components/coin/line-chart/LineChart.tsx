@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto"; // Don't remove this
@@ -10,6 +9,8 @@ interface LineChartProps {
   priceType: string;
   multiAxis?: boolean;
 }
+
+console.log(ChartJS);
 
 const LineChart: React.FC<LineChartProps> = ({
   chartData,
