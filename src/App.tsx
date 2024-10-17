@@ -6,12 +6,11 @@ import CoinPage from "./pages/CoinPage";
 import ComparePage from "./pages/ComparePage";
 import WatchlistPage from "./pages/WatchlistPage";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
     <div className="App">
-      <div className="cursor" id="cursor" />
-      <div className="cursor-pointer" id="cursor-pointer" />
       <ToastContainer />
       <BrowserRouter>
         <Routes>
@@ -22,7 +21,6 @@ const App = () => {
           <Route path="/watchlist" element={<WatchlistPage />} />
         </Routes>
       </BrowserRouter>
-      {/* <Footer /> */}
     </div>
   );
 };
