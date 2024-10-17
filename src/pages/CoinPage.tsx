@@ -28,22 +28,21 @@ const CoinPage: React.FC = () => {
   });
 
   useEffect(() => {
-    getCoinDetails();
-  }, [id]);
-
-  const getCoinDetails = async () => {
-    if (!id) return;
-    setLoading(true);
-    const data = await getCoin(id);
-    if (data) {
-      setCoin(data);
-      const prices = await getCoinPrices(id, days, priceType);
-      if (prices) {
-        settingChartData(setChartData, prices, data);
-        setLoading(false);
+    const getCoinDetails = async () => {
+      if (!id) return;
+      setLoading(true);
+      const data = await getCoin(id);
+      if (data) {
+        setCoin(data);
+        const prices = await getCoinPrices(id, days, priceType);
+        if (prices) {
+          settingChartData(setChartData, prices, data);
+          setLoading(false);
+        }
       }
-    }
-  };
+    };
+    getCoinDetails();
+  }, []);
 
   const handleDaysChange = async (event: SelectChangeEvent<number>) => {
     if (!id) return;
@@ -79,7 +78,11 @@ const CoinPage: React.FC = () => {
       ) : (
         <>
           <div className="grey-wrapper">
-            <List coin={coin} delay={0.1} />
+            <table>
+              <tbody>
+                <List coin={coin} delay={0.1} />
+              </tbody>
+            </table>
           </div>
           <div className="grey-wrapper">
             <SelectDays days={days} handleDaysChange={handleDaysChange} />
