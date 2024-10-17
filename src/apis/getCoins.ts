@@ -1,4 +1,6 @@
 import axios from "axios";
+import { CoinMarketData } from "../types/coin-market-data";
+import { CoinSummary } from "../types/coin-item";
 
 const baseAPIURL = "https://api.coingecko.com/api/v3/";
 const apiKey = "CG-hUmMF79bdfzTsBY1KowWPA57";
@@ -11,36 +13,35 @@ const options = {
   },
 };
 
-// Define the Coin interface
-interface Coin {
-  id: string;
-  symbol: string;
-  name: string;
-  image: string;
-  current_price: number;
-  market_cap: number;
-  price_change_percentage_24h: number;
-  // Add other fields as needed
-}
-
-// Type guard to check if the error is an instance of Error
-const isError = (error: unknown): error is Error => {
-  return error instanceof Error;
+const mapCoinListToCoinSummaryList = (
+  coinList: CoinMarketData[]
+): CoinSummary[] => {
+  return coinList.map((coin) => ({
+    id: coin.id,
+    name: coin.name,
+    symbol: coin.symbol,
+    image: coin.image,
+    desc: "",
+    price_change_percentage_24h: coin.price_change_percentage_24h,
+    total_volume: coin.total_volume,
+    current_price: coin.current_price,
+    market_cap: coin.market_cap,
+  }));
 };
 
-export const get100Coins = async (): Promise<Coin[] | undefined> => {
+export const getCoins = async (): Promise<CoinSummary[] | undefined> => {
   try {
-    const response = await axios.get<Coin[]>(
+    const response = await axios.get<CoinMarketData[]>(
       `${baseAPIURL}coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`,
       options
     );
-    console.log("RESPONSE>>>", response.data);
-    return response.data;
-  } catch (error: unknown) {
-    if (isError(error)) {
-      console.error("ERROR>>>", error.message);
-    } else {
-      console.error("Unknown error occurred");
-    }
+    const coinList = response.data;
+
+    // Map the fetched data to the required coin summary type
+    const coinSummary = mapCoinListToCoinSummaryList(coinList);
+    return coinSummary;
+  } catch (error) {
+    console.error("Error fetching coin data:", error);
+    return undefined;
   }
 };
