@@ -10,6 +10,7 @@ import { addToWatchlist } from "../../../utils/addToWatchlist";
 import { hasBeenAdded } from "../../../utils/hasBeenAdded";
 import { removeFromWatchlist } from "../../../utils/removeFromWatchlist";
 import { CoinSummary } from "../../../types/coin-item";
+import { Link } from "react-router-dom";
 
 interface GridProps {
   coin: CoinSummary;
@@ -21,7 +22,7 @@ const Grid: React.FC<GridProps> = ({ coin, delay, isWatchlistPage }) => {
   const [added, setAdded] = useState<boolean>(hasBeenAdded(coin.id));
 
   return (
-    <a href={`/coin/${coin.id}`}>
+    <Link to={`/coin/${coin.id}`}>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -111,7 +112,7 @@ const Grid: React.FC<GridProps> = ({ coin, delay, isWatchlistPage }) => {
           </span>
         </p>
       </motion.div>
-    </a>
+    </Link>
   );
 };
 
