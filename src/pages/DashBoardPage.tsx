@@ -34,18 +34,17 @@ function DashboardPage() {
   });
 
   useEffect(() => {
+    const getData = async () => {
+      setLoading(true);
+      const data = await getCoins();
+      if (data) {
+        setCoins(data);
+        setPaginatedCoins(data.slice(0, 10));
+        setLoading(false);
+      }
+    };
     getData();
   }, []);
-
-  const getData = async () => {
-    setLoading(true);
-    const data = await getCoins();
-    if (data) {
-      setCoins(data);
-      setPaginatedCoins(data.slice(0, 10));
-      setLoading(false);
-    }
-  };
 
   return (
     <>
