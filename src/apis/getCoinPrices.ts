@@ -1,8 +1,8 @@
 import axios from "axios";
 import { HistoricalChatData } from "../types/chart-data";
 
-const baseAPIURL = "https://api.coingecko.com/api/v3/";
-const apiKey = "CG-hUmMF79bdfzTsBY1KowWPA57";
+const baseAPIURL = `${import.meta.env.VITE_COIN_GECKO_API_URL}`;
+const apiKey = `${import.meta.env.VITE_CRYPTO_API_KEY}`;
 
 const options = {
   method: "GET",
@@ -19,7 +19,7 @@ export const getCoinPrices = async (
 ) => {
   const prices = await axios
     .get<HistoricalChatData>(
-      `${baseAPIURL}coins/${id}/market_chart?vs_currency=usd&days=${days}&interval=daily`,
+      `${baseAPIURL}/coins/${id}/market_chart?vs_currency=usd&days=${days}&interval=daily`,
       options
     )
     .then((response) => {
