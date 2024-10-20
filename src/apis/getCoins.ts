@@ -2,8 +2,8 @@ import axios from "axios";
 import { CoinMarketData } from "../types/coin-market-data";
 import { CoinSummary } from "../types/coin-item";
 
-const baseAPIURL = "https://api.coingecko.com/api/v3/";
-const apiKey = "CG-hUmMF79bdfzTsBY1KowWPA57";
+const baseAPIURL: string = `${import.meta.env.VITE_COIN_GECKO_API_URL}`;
+const apiKey: string = `${import.meta.env.VITE_CRYPTO_API_KEY}`;
 
 const options = {
   method: "GET",
@@ -32,7 +32,7 @@ const mapCoinListToCoinSummaryList = (
 export const getCoins = async (): Promise<CoinSummary[] | undefined> => {
   try {
     const response = await axios.get<CoinMarketData[]>(
-      `${baseAPIURL}coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`,
+      `${baseAPIURL}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`,
       options
     );
     const coinList = response.data;
