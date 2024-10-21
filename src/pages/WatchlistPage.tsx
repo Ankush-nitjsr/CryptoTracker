@@ -6,6 +6,7 @@ import TabsComponent from "../components/dashboard/tabs/Tabs";
 import { getCoins } from "../apis/getCoins";
 import { CoinSummary } from "../types/coin-item";
 import Footer from "../components/common/footer/Footer";
+import { Link } from "react-router-dom";
 
 function WatchlistPage() {
   const [coins, setCoins] = useState<string[]>([]);
@@ -51,9 +52,9 @@ function WatchlistPage() {
                 No Items in the Watchlist
               </h1>
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <a href="/dashboard">
+                <Link to="/dashboard">
                   <Button text={"Dashboard"} />
-                </a>
+                </Link>
               </div>
             </div>
           ) : (
