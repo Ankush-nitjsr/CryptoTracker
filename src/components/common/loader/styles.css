@@ -1,7 +1,7 @@
 .loader-wrapper {
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  height: 70vh;
+  width: 90vw;
   justify-content: center;
   align-items: center;
   background-color: var(--black);
