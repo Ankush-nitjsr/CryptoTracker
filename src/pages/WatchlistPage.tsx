@@ -5,6 +5,7 @@ import Loader from "../components/common/loader/Loader";
 import TabsComponent from "../components/dashboard/tabs/Tabs";
 import { getCoins } from "../apis/getCoins";
 import { CoinSummary } from "../types/coin-item";
+import Footer from "../components/common/footer/Footer";
 
 function WatchlistPage() {
   const [coins, setCoins] = useState<string[]>([]);
@@ -27,17 +28,25 @@ function WatchlistPage() {
       setLoading(false);
     };
     getData();
-  }, []); // No need to include 'coins' in the dependency array
+  }, []);
 
   return (
     <div>
-      {loading || !coins.length ? (
+      <Header />
+      {loading ? (
         <Loader />
       ) : (
-        <div style={{ minHeight: "90vh" }}>
-          {myWatchlist.length === 0 ? (
-            <div>
-              <Header />
+        <div style={{ minHeight: "70vh" }}>
+          {coins.length === 0 ? (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "60vh",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>
                 No Items in the Watchlist
               </h1>
@@ -48,13 +57,13 @@ function WatchlistPage() {
               </div>
             </div>
           ) : (
-            <div style={{ height: "95vh" }}>
-              <Header />
+            <div style={{ minHeight: "60vh" }}>
               <TabsComponent coins={myWatchlist} isWatchlistPage={true} />
             </div>
           )}
         </div>
       )}
+      <Footer />
     </div>
   );
 }
