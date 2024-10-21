@@ -37,7 +37,6 @@ const TabsComponent: React.FC<TabsComponentProps> = ({
 
   const style = {
     color: "var(--white)",
-    width: "50vw",
     fontSize: "1.2rem",
     fontWeight: 600,
     fontFamily: "Inter",
@@ -48,7 +47,11 @@ const TabsComponent: React.FC<TabsComponentProps> = ({
     <Box>
       <ThemeProvider theme={theme}>
         <TabContext value={tabValue}>
-          <TabList variant="fullWidth" onChange={handleChange}>
+          <TabList
+            variant="fullWidth"
+            onChange={handleChange}
+            className="tabList"
+          >
             <Tab label="Grid" value="grid" sx={style} />
             <Tab label="List" value="list" sx={style} />
           </TabList>
